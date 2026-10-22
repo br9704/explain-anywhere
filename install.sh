@@ -33,6 +33,7 @@ if [[ ! -f "$CONF" ]]; then
 fi
 
 echo "Binding Control+Shift+I"
+# shellcheck disable=SC2016  # "^$i" is the literal key equivalent Control+Shift+I, not a variable
 defaults write pbs NSServicesStatus -dict-add '"(null) - Explain with Claude - runWorkflowAsService"' \
   '{ "enabled_context_menu" = 1; "enabled_services_menu" = 1; "key_equivalent" = "^$i"; "presentation_modes" = { ContextMenu = 1; ServicesMenu = 1; }; }'
 /System/Library/CoreServices/pbs -update || true
