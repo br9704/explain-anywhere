@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Explain Anywhere logo">
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="#141416"/>
+  <rect x="88" y="200" width="164" height="124" rx="22" fill="#F5A524" fill-opacity="0.42"/>
+  <path d="M198 132 C236 132 252 146 252 182 V330 C252 366 236 380 198 380 M306 132 C268 132 252 146 252 182 M252 330 C252 366 268 380 306 380" fill="none" stroke="#FFFFFF" stroke-width="36" stroke-linecap="round"/>
+  <path d="M390.0,68.0 L400.6,117.4 L450.0,128.0 L400.6,138.6 L390.0,188.0 L379.4,138.6 L330.0,128.0 L379.4,117.4Z" fill="#F5A524" stroke="#F5A524" stroke-width="8" stroke-linejoin="round"/>
+</svg>

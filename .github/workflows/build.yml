@@ -1,0 +1,42 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    name: Compile (swiftc)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift version
+        run: xcrun swiftc --version
+      - name: Compile the app
+        run: |
+          mkdir -p build
+          xcrun swiftc -O -swift-version 5 Sources/main.swift -o build/Explain -framework Cocoa -framework WebKit
+      - name: Build the app bundle
+        run: scripts/build-app.sh "build/Explain Anywhere.app"
+      - name: Check the bundle
+        run: |
+          plutil -lint "build/Explain Anywhere.app/Contents/Info.plist"
+          test -x "build/Explain Anywhere.app/Contents/MacOS/Explain"
+          test -f "build/Explain Anywhere.app/Contents/Resources/AppIcon.icns"
+          codesign --verify --verbose "build/Explain Anywhere.app"
+
+  shellcheck:
+    name: ShellCheck
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: command -v shellcheck || brew install shellcheck
+      - name: Lint the scripts
+        # The scripts are zsh; ShellCheck has no zsh mode, so they are checked as bash.
+        run: shellcheck -s bash install.sh uninstall.sh scripts/explain-anywhere scripts/build-app.sh

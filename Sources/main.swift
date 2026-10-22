@@ -9,6 +9,7 @@
 //   --keep            start pinned (does not close on a click outside)
 //   --followup <s>    after the first answer, send this follow-up automatically (testing)
 //   --offscreen <dir> render headless and write PNG frames to <dir>, then quit (screenshots)
+//   --frames <fps>    with --offscreen, also write numbered frames of the open and answer motion (demo GIF)
 //   --info <path>     write window number and frame here once shown (testing)
 //   --at <x,top>      place the panel's top-left here, in screen points (testing)
 //
@@ -343,7 +344,16 @@ final class App: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavi
     var firstAnswer: Answer?
     var pairs: [[String: String]] = []
     var offscreenDir: String?
+    var frameFPS: Double = 0
     var shotN = 0
+
+    /// Numbered frames for the demo animation, e.g. a-open-000.png ... (only with --offscreen --frames).
+    func burst(_ tag: String, seconds: Double) {
+        guard frameFPS > 0 else { return }
+        for k in 0..<Int(seconds * frameFPS) {
+            shoot(String(format: "%@-%03d", tag, k), after: Double(k) / frameFPS)
+        }
+    }
 
     /// Send the current lookup to the save webhook (text, first answer, follow-ups) and reset.
     func flushWebhook(done: @escaping () -> Void = {}) {
@@ -414,6 +424,7 @@ final class App: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavi
             case "--followup": if i + 1 < a.count { autoFollowup = a[i + 1]; i += 1 }
             case "--info": if i + 1 < a.count { infoPath = a[i + 1]; i += 1 }
             case "--offscreen": if i + 1 < a.count { offscreenDir = a[i + 1]; i += 1 }
+            case "--frames": if i + 1 < a.count { frameFPS = min(60, max(0, Double(a[i + 1]) ?? 0)); i += 1 }
             default: break
             }
             i += 1
@@ -557,6 +568,7 @@ final class App: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavi
         if offscreenDir != nil {
             shoot("open-1", after: 0.0); shoot("open-2", after: 0.12); shoot("open-3", after: 0.24)
             shoot("loading-1", after: 0.6); shoot("loading-2", after: 2.1)
+            burst("a-open", seconds: 1.2)
             DispatchQueue.main.asyncAfter(deadline: .now() + 60) { NSApp.terminate(nil) }
         }
         if keep { web.evaluateJavaScript("setPinned(true)") }
@@ -598,7 +610,9 @@ final class App: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavi
                 entry += "**\(a.title)**\n\n\(a.logText)\n"
                 if self.offscreenDir == nil { appendLog(entry) }
                 if let f = followup { self.pairs.append(["q": f, "a": a.plain]) } else { self.firstAnswer = a }
-                self.shoot(followup == nil ? "answer" : "followup", after: 1.0, final: followup != nil || self.autoFollowup == nil)
+                if followup == nil { self.burst("b-answer", seconds: 1.6) }
+                self.shoot(followup == nil ? "answer" : "followup", after: self.frameFPS > 0 ? 2.0 : 1.0,
+                           final: followup != nil || self.autoFollowup == nil)
                 if let f = self.autoFollowup {
                     self.autoFollowup = nil
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { self.followUp(f) }

@@ -17,24 +17,7 @@ for c in "$HOME/.local/bin/claude" /opt/homebrew/bin/claude /usr/local/bin/claud
 
 APP="$HOME/Applications/Explain Anywhere.app"
 echo "Building $APP"
-mkdir -p "$APP/Contents/MacOS"
-cat > "$APP/Contents/Info.plist" <<'PLIST'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-  <key>CFBundleIdentifier</key><string>io.github.explain-anywhere</string>
-  <key>CFBundleName</key><string>Explain Anywhere</string>
-  <key>CFBundleExecutable</key><string>Explain</string>
-  <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>1.0</string>
-  <key>CFBundleVersion</key><string>1</string>
-  <key>LSMinimumSystemVersion</key><string>13.0</string>
-  <key>LSUIElement</key><true/>
-  <key>NSHighResolutionCapable</key><true/>
-</dict></plist>
-PLIST
-xcrun swiftc -O -swift-version 5 Sources/main.swift -o "$APP/Contents/MacOS/Explain" -framework Cocoa -framework WebKit
-codesign --force --sign "${SIGN_ID:--}" "$APP"
+scripts/build-app.sh "$APP"
 
 echo "Installing the launcher and the Quick Action"
 mkdir -p "$HOME/.local/bin" "$HOME/Library/Services"
@@ -44,7 +27,7 @@ cp -R "QuickAction/Explain with Claude.workflow" "$HOME/Library/Services/"
 
 CONF="$HOME/.config/explain-anywhere/config.json"
 if [[ ! -f "$CONF" ]]; then
-  mkdir -p "${CONF:h}"
+  mkdir -p "$(dirname "$CONF")"
   cp config.example.json "$CONF"
   echo "Wrote default settings to $CONF"
 fi
