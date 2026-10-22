@@ -1,0 +1,10 @@
+#!/bin/zsh
+# Launcher called by the "Explain with Claude" Quick Action.
+# The selection arrives on stdin and is handed to the app in a private temp file,
+# never on a command line. The app opens in the background so the app you were
+# using stays in front.
+dir="$HOME/Library/Caches/explain-anywhere"
+mkdir -p "$dir" && chmod 700 "$dir"
+tmp="$(mktemp "$dir/sel.XXXXXX")" || exit 1
+head -c 24000 > "$tmp"
+/usr/bin/open -g -n "$HOME/Applications/Explain Anywhere.app" --args --file "$tmp"

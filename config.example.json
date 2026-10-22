@@ -1,0 +1,11 @@
+{
+  "model": "claude-haiku-5-5",
+  "timeoutSeconds": 30,
+  "audience": "someone learning software and AI engineering",
+  "claudePath": null,
+  "logFile": "~/Library/Logs/explain-anywhere.md",
+  "logKeepDays": 14,
+  "notesDir": "~/Documents/Explain Anywhere",
+  "webhookURL": null,
+  "webhookTokenFile": null
+}

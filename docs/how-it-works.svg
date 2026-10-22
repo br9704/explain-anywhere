@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 300" width="880" height="300" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif">
+  <rect width="880" height="300" rx="18" fill="#131315"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="rgba(255,255,255,0.45)"/></marker>
+  </defs>
+  <g font-size="13" fill="rgba(255,255,255,0.85)">
+    <rect x="24" y="60" width="150" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)"/>
+    <text x="99" y="88" text-anchor="middle" font-weight="700">Select text</text>
+    <text x="99" y="108" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">in any app</text>
+
+    <rect x="214" y="60" width="170" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)"/>
+    <text x="299" y="88" text-anchor="middle" font-weight="700">Quick Action</text>
+    <text x="299" y="108" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">Control+Shift+I or right-click</text>
+
+    <rect x="424" y="60" width="190" height="64" rx="12" fill="#242427" stroke="rgba(255,255,255,0.14)"/>
+    <text x="519" y="88" text-anchor="middle" font-weight="700">Explain Anywhere.app</text>
+    <text x="519" y="108" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">floating panel, opens at once</text>
+
+    <rect x="654" y="60" width="202" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)"/>
+    <text x="755" y="88" text-anchor="middle" font-weight="700">claude -p</text>
+    <text x="755" y="108" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">your Claude Code login, no API key</text>
+
+    <rect x="424" y="196" width="190" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)"/>
+    <text x="519" y="224" text-anchor="middle" font-weight="700">Rendered safely</text>
+    <text x="519" y="244" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">checked JSON, text nodes only</text>
+
+    <rect x="654" y="196" width="202" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 4"/>
+    <text x="755" y="224" text-anchor="middle" font-weight="700">Optional saves</text>
+    <text x="755" y="244" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">log file, notes, your webhook</text>
+
+    <rect x="24" y="196" width="360" height="64" rx="12" fill="#1C1C1E" stroke="rgba(255,255,255,0.10)"/>
+    <text x="204" y="224" text-anchor="middle" font-weight="700">Follow-ups and related terms</text>
+    <text x="204" y="244" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="11">ask again in place, or click a chip to explain it</text>
+  </g>
+  <g stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" marker-end="url(#a)">
+    <path d="M174 92H210"/><path d="M384 92H420"/><path d="M614 84H650"/>
+    <path d="M650 102H618"/>
+    <path d="M519 124V192"/><path d="M614 228H650"/><path d="M424 228H388"/>
+  </g>
+  <text x="440" y="34" text-anchor="middle" font-size="15" font-weight="700" fill="rgba(255,255,255,0.85)" font-family="-apple-system, BlinkMacSystemFont, sans-serif">How it works</text>
+</svg>
