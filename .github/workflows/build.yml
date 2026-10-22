@@ -39,4 +39,4 @@ jobs:
         run: command -v shellcheck || brew install shellcheck
       - name: Lint the scripts
         # The scripts are zsh; ShellCheck has no zsh mode, so they are checked as bash.
-        run: shellcheck -s bash install.sh uninstall.sh scripts/explain-anywhere scripts/build-app.sh
+        run: shellcheck -s bash install.sh uninstall.sh scripts/explain-anywhere scripts/build-app.sh scripts/package-release.sh

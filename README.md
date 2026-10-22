@@ -69,7 +69,7 @@ If you have an Apple Development certificate, sign with it so macOS keeps folder
 SIGN_ID="Apple Development: Your Name (XXXXXXXXXX)" ./install.sh
 ```
 
-A prebuilt app is attached to each [release](https://github.com/br9704/explain-anywhere/releases). It is ad-hoc signed and not notarized, so Gatekeeper warns on first open; building from source is the recommended path.
+**Prebuilt download.** Each [release](https://github.com/br9704/explain-anywhere/releases) has a zip with the app, the Quick Action and the installer, so you do not need the Swift compiler. The app is ad-hoc signed and **not notarized**: Gatekeeper treats it as from an unidentified developer, and the installer removes its quarantine flag so the Quick Action can open it. Only use it if you trust the download; building from source is the recommended path. Unzip, then run `./install.sh` inside the folder.
 
 To remove it: `./uninstall.sh` (add `--all` to remove your settings too).
 
@@ -169,6 +169,7 @@ xcrun swiftc -O -swift-version 5 Sources/main.swift -o build/Explain -framework 
 ./build/Explain --offscreen /tmp/shots --text "vector index"     # headless PNG frames, then quits
 ./build/Explain --offscreen /tmp/frames --frames 30 --text "RAG" # numbered frames for the demo GIF
 scripts/build-app.sh "build/Explain Anywhere.app"                # the full app bundle, ad-hoc signed
+scripts/package-release.sh                                       # the release zip
 ```
 
 ## What is tested
